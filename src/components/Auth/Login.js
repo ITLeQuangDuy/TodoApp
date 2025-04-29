@@ -19,7 +19,7 @@ const Login = ({setLogin}) => {
 
   return (
     <div className="login">
-      <h1>Login</h1>
+      <h1>Đăng nhập</h1>
       <form className="login-form">
         <input
           className="login-input"

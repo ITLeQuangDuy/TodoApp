@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer"
+import TodoList from "./Todo/TodoList";
 
 const Home = ({ setLogin }) => {
   const navigate = useNavigate();
@@ -10,10 +13,13 @@ const Home = ({ setLogin }) => {
   };
 
   return (
-    <div>
-      <div>Đây là trang chủ</div>
-      <button onClick={handleLogut}>Đăng xuất</button>
-    </div>
+    <>
+      <Header></Header>
+        <div>TODO APP</div>
+        <TodoList></TodoList>
+        <button onClick={handleLogut}>Đăng xuất</button>
+     <Footer></Footer>
+    </>
   );
 };
 
