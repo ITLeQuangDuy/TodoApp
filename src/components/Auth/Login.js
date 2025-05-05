@@ -1,40 +1,53 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { AuthContext } from "./AuthContext";
+// import Home from "../Home";
 
-const Login = ({setLogin}) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  
-  const navigate = useNavigate();
+const Login = ({ setCurrentUser }) => {
+  const [form, setForm] = useState([{ emai: "", password: "" }]);
+  // const nivigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (username.trim() === "" && password.trim() === "") {
-      alert("Vui lòng nhập đầy đủ tài khoản mật khẩu");
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const user = users.find(
+      (u) => u.email === form.email && u.password === form.password
+    );
+
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      setCurrentUser(user);
+      alert("Xin chào " + user.name);
+      // nivigate("/home");
     } else {
-      setLogin(true);
-      navigate("/home");
+      alert("Email hoặc mật khẩu không đúng");
     }
   };
 
   return (
     <div className="login">
       <h1>Đăng nhập</h1>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleLogin}>
         <input
           className="login-input"
           placeholder="Tài khoản"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          name="email"
+          onChange={handleChange}
         ></input>
         <input
           className="login-input"
           placeholder="Mật khẩu"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          onChange={handleChange}
         ></input>
 
-        <button className="login-button" onClick={handleLogin}>Đăng nhập</button>
+        <button className="login-button">Đăng nhập</button>
       </form>
     </div>
   );

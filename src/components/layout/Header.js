@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import "../../styles/layout/Header.css";
+import { AuthContext } from "../Auth/AuthContext";
 
 const Header = () => {
-    return(
-        <div className="Đây là header">
-            <h2>Đây là header</h2>
-        </div>
-    )
-}
+  const { user, logout } = useContext(AuthContext);
+
+  return (
+    <div className="header">
+      <h1>TODO APP</h1>
+      {user ? (
+        <button onClick={logout}>Logout</button>
+      ) : (
+        <a href="/login">Login</a>
+      )}
+    </div>
+  );
+};
 
 export default Header;

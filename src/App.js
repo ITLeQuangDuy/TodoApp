@@ -1,34 +1,25 @@
+import { Navigate, Route, Router, Routes } from "react-router-dom";
 import "./App.css";
-import { useState } from "react";
+// import AppRoutes from "./routes";
 import Login from "./components/Auth/Login";
-import Home from "./components/Home";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import Register from "./components/Auth/Register";
+import { useState } from "react";
 
 function App() {
-  const [isLogin, setLogin] = useState(false);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("currentUser")) || null
+  );
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login setLogin={setLogin} />} />
-        <Route
-          path="/home"
-          element={
-            isLogin ? (
-              <Home setLogin={setLogin} />
-            ) : ( 
-              <Navigate to="/login" />
-            )
-          }
-        />
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
-    </Router>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<Navigate to="/login" />}></Route>
+    //   </Routes>
+    // </Router>
+    <>
+      <Login setCurrentUser={setCurrentUser}></Login>
+      <Register></Register>
+    </>
   );
 }
 
