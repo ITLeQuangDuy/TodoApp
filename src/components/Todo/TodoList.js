@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const TodoList = (e) => {
   const [todos, setTodos] = useState(() => {
@@ -8,10 +9,12 @@ const TodoList = (e) => {
 
   const [inputValue, setInputValue] = useState("");
   const [selectedTodos, setSelectedTodos] = useState([]);
+  const { currentUser } = useAuth();
 
   const handleAddTodo = () => {
     if (inputValue.trim()) {
       const newTodo = {
+        owner: currentUser.username,
         id: Date.now(),
         text: inputValue,
         completed: false,
@@ -46,6 +49,10 @@ const TodoList = (e) => {
     setSelectedTodos([]);
   };
 
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos])
+
   return (
     <div>
       <h2>Danh sách việc cần làm</h2>
@@ -59,17 +66,19 @@ const TodoList = (e) => {
         <div>Không có việc cần làm</div>
       ) : (
         <ul>
-          {todos.map((todo) => (
-            <li key={todo.id}>
-              <input
-                type="checkbox"
-                checked={selectedTodos.includes(todo.id)}
-                onChange={() => handleSelectedTodo(todo.id)}
-              ></input>{" "}
-              {todo.text}{" "}
-              {/* <button onClick={() => handleDeleteTodo(todo.id)}>Xóa</button> */}
-            </li>
-          ))}
+          {todos
+            .filter((todo) => todo.owner === currentUser?.username) // chỉ lấy todo của user hiện tại
+            .map((todo) => (
+              <li key={todo.id}>
+                <input
+                  type="checkbox"
+                  checked={selectedTodos.includes(todo.id)}
+                  onChange={() => handleSelectedTodo(todo.id)}
+                ></input>{" "}
+                {todo.text}{" "}
+                {/* <button onClick={() => handleDeleteTodo(todo.id)}>Xóa</button> */}
+              </li>
+            ))}
         </ul>
       )}
 

@@ -1,5 +1,12 @@
+
+
 .header{
-    height: 500px;
+    height: 100px;
     width: 100%;
     background-color: red;
 }
+
+.header h2{
+    color: aliceblue;
+}
+

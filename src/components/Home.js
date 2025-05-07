@@ -1,24 +1,21 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer"
 import TodoList from "./Todo/TodoList";
+import { useAuth } from "./contexts/AuthContext";
 
-const Home = ({ setLogin }) => {
+const Home = ({  }) => {
   const navigate = useNavigate();
+  const {logout} = useAuth();
 
   const handleLogut = () => {
-    setLogin(false);
-    navigate("/login");
+    logout();
+    navigate("/");
   };
 
   return (
     <>
-      <Header></Header>
-        <div>TODO APP</div>
-        <TodoList></TodoList>
-        <button onClick={handleLogut}>Đăng xuất</button>
-     <Footer></Footer>
+      <TodoList></TodoList>
+      <button onClick={handleLogut}>Đăng xuất</button>
     </>
   );
 };
