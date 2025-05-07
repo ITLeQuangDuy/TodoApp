@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import InputPassword from "../common/InputPassword";
+import FormWrapper from "../common/FormWrapper";
 
 const ForgotPassword = () => {
   const { users, forgotPassword } = useAuth();
@@ -39,30 +43,56 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div>
+    <FormWrapper>
       <h2>Quên mật khẩu</h2>
-      <input
+      <Input
+        label="Nhập tài khoản của bạn"
         placeholder="Nhập tài khoản"
         onChange={(e) => setUsername(e.target.value)}
-      ></input>
-      <button onClick={handleSearch}>Tìm</button>
+      ></Input>
+      <Button onClick={handleSearch}>Tìm tài khoản</Button>
 
       {hasSearched && !foundData && <div>Không tìm thấy thông tin</div>}
 
       {foundData && (
         <div>
-          <input
+          <InputPassword
             placeholder="Nhập mật khẩu mới"
             onChange={(e) => setNewPassword(e.target.value)}
-          ></input>
-          <input
+          ></InputPassword>
+          <InputPassword
             placeholder="Nhập lại mật khẩu"
             onChange={(e) => setConfirmPassword(e.target.value)}
-          ></input>
-          <button onClick={handleSubmit}>Đổi mật khẩu</button>
+          ></InputPassword>
+          <Button onClick={handleSubmit}>Đổi mật khẩu</Button>
         </div>
       )}
-    </div>
+    </FormWrapper>
+
+    // <div>
+    //   <h2>Quên mật khẩu</h2>
+    //   <input
+    //     placeholder="Nhập tài khoản"
+    //     onChange={(e) => setUsername(e.target.value)}
+    //   ></input>
+    //   <button onClick={handleSearch}>Tìm</button>
+
+    //   {hasSearched && !foundData && <div>Không tìm thấy thông tin</div>}
+
+    //   {foundData && (
+    //     <div>
+    //       <input
+    //         placeholder="Nhập mật khẩu mới"
+    //         onChange={(e) => setNewPassword(e.target.value)}
+    //       ></input>
+    //       <input
+    //         placeholder="Nhập lại mật khẩu"
+    //         onChange={(e) => setConfirmPassword(e.target.value)}
+    //       ></input>
+    //       <button onClick={handleSubmit}>Đổi mật khẩu</button>
+    //     </div>
+    //   )}
+    // </div>
   );
 };
 

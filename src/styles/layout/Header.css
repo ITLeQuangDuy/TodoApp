@@ -1,12 +1,30 @@
-
-
-.header{
-    height: 100px;
-    width: 100%;
-    background-color: red;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.header h2{
-    color: aliceblue;
+.header {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0084a8;
 }
 
+.header h2 {
+  color: white;
+  font-size: 30px;
+}
+
+.header-hello-user{
+  display: flex;
+  font-size: 20px;
+  color: white;
+}
+
+.header-hello-user span {
+  padding-left: 3px;
+  color: red;
+}

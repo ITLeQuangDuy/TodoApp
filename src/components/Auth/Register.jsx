@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import FormWrapper from "../common/FormWrapper";
+import Input from "../common/Input";
+import InputPassword from "../common/InputPassword";
+import Button from "../common/Button";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -35,37 +39,35 @@ const Register = () => {
   };
 
   return (
-    <div className="register">
-      <h2>Đăng ký</h2>
-      <input
-        name="name"
-        className="register-innput"
+    <FormWrapper>
+      <h1>Đăng ký</h1>
+      <Input
         placeholder="Tên"
+        label="Tên"
+        name="name"
         onChange={(e) => setName(e.target.value)}
-      ></input>
-      <input
+      ></Input>
+      <Input
+        placeholder="Tài khoản"
+        label="Tài khoản"
         name="username"
-        className="register-input"
-        placeholder="Email"
         onChange={(e) => setUsername(e.target.value)}
-      ></input>
-      <input
-        name="password"
-        className="register-input"
+      ></Input>
+      <InputPassword
         placeholder="Mật khẩu"
+        label="Mật khẩu"
+        name="password"
         onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <input
-        name="confirmPassword"
-        className="register-input"
+      ></InputPassword>
+      <InputPassword
         placeholder="Nhập lại mật khẩu"
+        label="Nhập lại mật khẩu"
+        name="confirmPassword"
         onChange={(e) => setConfirmPassword(e.target.value)}
-      ></input>
+      ></InputPassword>
 
-      <button onClick={handleSubmit} className="register-button">
-        Đăng ký
-      </button>
-    </div>
+      <Button onClick={handleSubmit}>Đăng ký</Button>
+    </FormWrapper>
   );
 };
 

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import Input from "../common/Input";
+import FormWrapper from "../common/FormWrapper";
+import Button from "../common/Button";
 
 const TodoList = (e) => {
   const [todos, setTodos] = useState(() => {
@@ -54,13 +57,15 @@ const TodoList = (e) => {
   }, [todos])
 
   return (
-    <div>
+
+
+    <FormWrapper>
       <h2>Danh sách việc cần làm</h2>
-      <input
+      <Input
         placeholder="Thêm việc cần làm"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-      ></input>
+      ></Input>
 
       {todos.length === 0 ? (
         <div>Không có việc cần làm</div>
@@ -83,11 +88,12 @@ const TodoList = (e) => {
       )}
 
       <div>
-        <button onClick={handleAddTodo}>Thêm</button>
-        <button>Sửa</button>
-        <button onClick={handleDeleteSelected}>Xóa</button>
+        <Button onClick={handleAddTodo}>Thêm</Button>
+        <Button>Sửa</Button>
+        <Button onClick={handleDeleteSelected}>Xóa</Button>
       </div>
-    </div>
+    </FormWrapper>
+
   );
 };
 

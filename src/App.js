@@ -2,6 +2,7 @@ import { Route, Router, Routes, Navigate, BrowserRouter } from "react-router-dom
 import "./App.css";
 import { AuthProvider } from "./components/contexts/AuthContext";
 import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import Home from "./components/Home";
@@ -21,6 +22,7 @@ function App() {
             <Route path="/forgotpassword" element={<ForgotPassword/>}></Route>
           </Routes>
         </main>
+      <Footer></Footer>
       </BrowserRouter>
     </AuthProvider>
   );

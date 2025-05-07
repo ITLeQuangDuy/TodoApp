@@ -1,8 +1,10 @@
-import React, { useContext, useState } from "react";
-import Header from "../layout/Header";
-import Footer from "../layout/Footer";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import InputPassword from "../common/InputPassword";
+import FormWrapper from "../common/FormWrapper";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -32,32 +34,30 @@ const Login = () => {
 
   return (
     <>
-      <div className="login">
-        <h1>Đăng nhập</h1>
-
-        <input
-          className="login-input"
-          placeholder="Tài khoản"
-          name="username"
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>
-        <input
-          className="login-input"
-          placeholder="Mật khẩu"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-
-        <button onClick={handleLogin} className="login-button">
-          Đăng nhập
-        </button>
-        <div>
-          <p>
-            Chưa có tài khoản <Link to="/register">Đăng ký ngay</Link>
-          </p>
-          <Link to="/forgotpassword">Quên mật khẩu</Link>
-        </div>
-      </div>
+      <FormWrapper>
+        <FormWrapper>
+          <h1>Đăng nhập</h1>
+          <Input
+            label="Tài khoản"
+            placeholder="Tài khoản"
+            name="username"
+            onChange={(e) => setUsername(e.target.value)}
+          ></Input>
+          <InputPassword
+            label="Mật khẩu"
+            placeholder="Mật khẩu"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          ></InputPassword>
+          <div>
+            <p>
+              Chưa có tài khoản <Link to="/register">Đăng ký ngay</Link>
+            </p>
+            <Link to="/forgotpassword">Quên mật khẩu</Link>
+          </div>
+          <Button onClick={handleLogin}>Đăng nhập</Button>
+        </FormWrapper>
+      </FormWrapper>
     </>
   );
 };
